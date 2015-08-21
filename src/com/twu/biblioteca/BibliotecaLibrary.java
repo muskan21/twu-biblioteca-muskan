@@ -137,4 +137,13 @@ public class BibliotecaLibrary {
     public ArrayList<User> getUserList() {
         return userlist;
     }
+
+    public boolean validateUser(String username, String librarynumber, String password) {
+        for(User u: userlist) {
+            if(username.equals(u.getUserName()) && librarynumber.equals(u.getLibraryNumber()) && password.equals(u.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

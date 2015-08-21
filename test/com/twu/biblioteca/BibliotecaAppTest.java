@@ -148,8 +148,19 @@ public class BibliotecaAppTest {
         assertEquals("password",user.getPassword());
 
         User user2 = new User("User 2","123-4568","password2");
-        assertEquals("User 2",user2.getUserName());
+        assertEquals("User 2", user2.getUserName());
         assertEquals("123-4568", user2.getLibraryNumber());
         assertEquals("password2", user2.getPassword());
+    }
+
+    @Test
+    public void testValidateUser() {
+        BibliotecaLibrary bibliotecaLibrary=new BibliotecaLibrary();
+        assertFalse(bibliotecaLibrary.validateUser("User1","678-6789","password"));
+        assertFalse(bibliotecaLibrary.validateUser("User1","123-1234","password1"));
+
+        bibliotecaLibrary.initializeLibrary();
+        assertFalse(bibliotecaLibrary.validateUser("User1","678-6789","password"));
+        assertTrue(bibliotecaLibrary.validateUser("User1", "123-1234", "password1"));
     }
 }
