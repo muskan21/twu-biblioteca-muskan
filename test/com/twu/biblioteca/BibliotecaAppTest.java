@@ -42,6 +42,8 @@ public class BibliotecaAppTest {
         assertEquals(12, bibliotecaLibrary.getBooksList().size());
         assertFalse(bibliotecaLibrary.getIsEmptyMovieList());
         assertEquals(4,bibliotecaLibrary.getMovieList().size());
+        assertFalse(bibliotecaLibrary.getIsEmptyUserList());
+        assertEquals(4,bibliotecaLibrary.getUserList().size());
     }
 
     @Test

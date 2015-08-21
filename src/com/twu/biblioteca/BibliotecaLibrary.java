@@ -13,16 +13,29 @@ public class BibliotecaLibrary {
     private ArrayList<Movie> movielist;
     private boolean isEmptyMovieList;
     private ArrayList<Movie> movieList;
+    private boolean isEmptyUserList;
+    private ArrayList<User> userlist;
 
     public BibliotecaLibrary() {
         isEmptyBookList=true;
         bookslist = new ArrayList<Books>();
         isEmptyMovieList=true;
         movielist = new ArrayList<Movie>();
+        isEmptyUserList=true;
+        userlist = new ArrayList<User>();
     }
 
     public boolean initializeLibrary() {
-        return this.initializeBook() && this.initializeMovie();
+        return this.initializeBook() && this.initializeMovie() && this.initializeUser();
+    }
+
+    private boolean initializeUser() {
+        userlist.add(new User("User1","123-1234","password1"));
+        userlist.add(new User("User2","123-1235","password2"));
+        userlist.add(new User("User3","123-1236","password3"));
+        userlist.add(new User("User4","123-1237","password4"));
+        isEmptyUserList=false;
+        return true;
     }
 
     private boolean initializeMovie() {
@@ -116,4 +129,12 @@ public class BibliotecaLibrary {
             }
         }
         return null;    }
+
+    public boolean getIsEmptyUserList() {
+        return isEmptyUserList;
+    }
+
+    public ArrayList<User> getUserList() {
+        return userlist;
+    }
 }
