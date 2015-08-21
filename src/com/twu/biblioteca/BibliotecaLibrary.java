@@ -110,7 +110,7 @@ public class BibliotecaLibrary {
     public Movie checkOutMovie(String moviename) {
         for(Movie m : movielist) {
             if(m.getMovieName().equals(moviename) && m.getIsCheckedOut()==false) {
-                m.setIsCheckedOut(true);
+                m.setIsCheckedOut();
                 //System.out.println("It's true");
                 return m;
             }

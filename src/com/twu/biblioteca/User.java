@@ -7,15 +7,22 @@ import java.util.Scanner;
  * Created by muskandhanda on 8/21/15.
  */
 public class User {
+    private String password;
+    private String libraryNumber;
     private ArrayList<Books> checkedOutBooks;
     private ArrayList<Movie> checkedOutMovies;
     private String username;
     private boolean isSet;
-    private String userName;
 
     public User() {
         checkedOutBooks=new ArrayList<Books>();
         checkedOutMovies=new ArrayList<Movie>();
+    }
+
+    public User(String username, String librarynumber, String password) {
+        this.username=username;
+        this.libraryNumber=librarynumber;
+        this.password=password;
     }
 
     public boolean checkOutBook(String bookname, BibliotecaLibrary bibliotecaLibrary) {
@@ -61,7 +68,7 @@ public class User {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public boolean checkOutMovie(String moviename, BibliotecaLibrary bibliotecaLibrary) {
@@ -75,5 +82,17 @@ public class User {
             return true;
         }
         else return false;
+    }
+
+    public String getUserName() {
+        return username;
+    }
+
+    public String getLibraryNumber() {
+        return libraryNumber;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

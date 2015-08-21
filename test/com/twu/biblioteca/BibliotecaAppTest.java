@@ -101,12 +101,15 @@ public class BibliotecaAppTest {
         assertEquals(2015, movie.getYear());
         assertEquals("Director Name", movie.getDirector());
         assertEquals(4.3f, movie.getRating(), 0.01);
+        assertFalse(movie.getIsCheckedOut());
 
         Movie movie2 = new Movie("Movie 2",2009,"Director 2",4);
         assertEquals("Movie 2", movie2.getName());
         assertEquals(2009, movie2.getYear());
         assertEquals("Director 2", movie2.getDirector());
         assertEquals(4f, movie2.getRating(), 0.01);
+        movie2.setIsCheckedOut();
+        assertTrue(movie2.getIsCheckedOut());
     }
 
     @Test
@@ -133,5 +136,18 @@ public class BibliotecaAppTest {
         bibliotecaLibrary.initializeLibrary();
         movie=bibliotecaLibrary.checkOutMovie(moviename);
         assertEquals(true, movie.getIsCheckedOut());
+    }
+
+    @Test
+    public void testUser() {
+        User user = new User("User Name","123-4567","password");
+        assertEquals("User Name",user.getUserName());
+        assertEquals("123-4567",user.getLibraryNumber());
+        assertEquals("password",user.getPassword());
+
+        User user2 = new User("User 2","123-4568","password2");
+        assertEquals("User 2",user2.getUserName());
+        assertEquals("123-4568", user2.getLibraryNumber());
+        assertEquals("password2", user2.getPassword());
     }
 }

@@ -45,7 +45,7 @@ public class Movie {
         return isCheckedOut;
     }
 
-    public void setIsCheckedOut(boolean isCheckedOut) {
-        this.isCheckedOut = isCheckedOut;
+    public void setIsCheckedOut() {
+        this.isCheckedOut = true;
     }
 }
