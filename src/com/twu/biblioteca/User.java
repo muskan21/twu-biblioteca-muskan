@@ -17,17 +17,17 @@ public class User {
     public User() {
         checkedOutBooks=new ArrayList<Books>();
         checkedOutMovies=new ArrayList<Movie>();
+        isSet=false;
     }
 
     public User(String username, String librarynumber, String password) {
         this.username=username;
         this.libraryNumber=librarynumber;
         this.password=password;
+        isSet=true;
     }
 
     public boolean checkOutBook(String bookname, BibliotecaLibrary bibliotecaLibrary) {
-        if(!isSetUserName())
-            username=inputUserName("check out", "book");
         if(bibliotecaLibrary.getIsEmptyBookList() == true)
             return false;
         Books b = bibliotecaLibrary.checkOutBook(bookname);
@@ -42,20 +42,11 @@ public class User {
         return isSet;
     }
 
-    private String inputUserName(String op, String item) {
-        System.out.println("Enter your username to "+op+" "+item+" : ");
-        Scanner input = new Scanner(System.in);
-        setIsSet();
-        return input.nextLine();
-    }
-
     public void setIsSet() {
         isSet=true;
     }
 
     public boolean returnBook(String bookname, BibliotecaLibrary bibliotecaLibrary) {
-        if(!isSetUserName())
-            username=inputUserName("return", "book");
         if(bibliotecaLibrary.getIsEmptyBookList()==true)
             return false;
         for(Books b : bibliotecaLibrary.getBooksList()) {
@@ -72,8 +63,6 @@ public class User {
     }
 
     public boolean checkOutMovie(String moviename, BibliotecaLibrary bibliotecaLibrary) {
-        if(!isSetUserName())
-            username=inputUserName("check out","movie");
         if(bibliotecaLibrary.getIsEmptyBookList() == true)
             return false;
         Movie m = bibliotecaLibrary.checkOutMovie(moviename);

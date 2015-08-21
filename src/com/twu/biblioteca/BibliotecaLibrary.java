@@ -76,7 +76,7 @@ public class BibliotecaLibrary {
     }
 
     public void printMenu() {
-        System.out.println("\nMENU.\n1.List Books.\n2.Check Out Book.\n3.Return Book.\n4.List Movies.\n5.Check Out Movies.\n6.Quit.\nEnter Your Choice.");
+        System.out.println("\nMENU.\n1.List Books.\n2.Check Out Book.\n3.Return Book.\n4.List Movies.\n5.Check Out Movies.\n6.User Login.\n7.Quit.\nEnter Your Choice.");
     }
 
     public int getInput() {
