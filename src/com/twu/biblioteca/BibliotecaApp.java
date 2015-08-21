@@ -44,12 +44,16 @@ public class BibliotecaApp {
                         break;
 
                     case 4:
+                        bibliotecaLibrary.printMovieList();
+                        break;
+
+                    case 5:
                         break;
 
                     default:
                         System.out.println("Select a valid option!!");
                 }
-        }while (choice != 4);
+        }while (choice != 5);
     }
 
     private static String getBookInput(String op) {
