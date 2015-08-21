@@ -101,7 +101,17 @@ public class BibliotecaLibrary {
     public void printMovieList() {
         System.out.println("Movie Name\t\t\t\t\tYear\tMovie Director\t\t\tRating");
         for(Movie m : movielist) {
-            System.out.println(m.getName()+"\t\t\t\t"+m.getYear()+"\t"+m.getDirector()+"\t\t\t"+m.getRating());
+            System.out.println(m.getName() + "\t\t\t\t" + m.getYear() + "\t" + m.getDirector() + "\t\t\t" + m.getRating());
         }
     }
+
+    public Movie checkOutMovie(String moviename) {
+        for(Movie m : movielist) {
+            if(m.getMovieName().equals(moviename) && m.getIsCheckedOut()==false) {
+                m.setIsCheckedOut(true);
+                //System.out.println("It's true");
+                return m;
+            }
+        }
+        return null;    }
 }

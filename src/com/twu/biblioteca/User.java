@@ -8,17 +8,19 @@ import java.util.Scanner;
  */
 public class User {
     private ArrayList<Books> checkedOutBooks;
+    private ArrayList<Movie> checkedOutMovies;
     private String username;
     private boolean isSet;
     private String userName;
 
     public User() {
         checkedOutBooks=new ArrayList<Books>();
+        checkedOutMovies=new ArrayList<Movie>();
     }
 
     public boolean checkOutBook(String bookname, BibliotecaLibrary bibliotecaLibrary) {
         if(!isSetUserName())
-            username=inputUserName("check out");
+            username=inputUserName("check out", "book");
         if(bibliotecaLibrary.getIsEmptyBookList() == true)
             return false;
         Books b = bibliotecaLibrary.checkOutBook(bookname);
@@ -33,8 +35,8 @@ public class User {
         return isSet;
     }
 
-    private String inputUserName(String op) {
-        System.out.println("Enter your username to "+op+" book : ");
+    private String inputUserName(String op, String item) {
+        System.out.println("Enter your username to "+op+" "+item+" : ");
         Scanner input = new Scanner(System.in);
         setIsSet();
         return input.nextLine();
@@ -46,7 +48,7 @@ public class User {
 
     public boolean returnBook(String bookname, BibliotecaLibrary bibliotecaLibrary) {
         if(!isSetUserName())
-            username=inputUserName("return");
+            username=inputUserName("return", "book");
         if(bibliotecaLibrary.getIsEmptyBookList()==true)
             return false;
         for(Books b : bibliotecaLibrary.getBooksList()) {
@@ -60,5 +62,18 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public boolean checkOutMovie(String moviename, BibliotecaLibrary bibliotecaLibrary) {
+        if(!isSetUserName())
+            username=inputUserName("check out","movie");
+        if(bibliotecaLibrary.getIsEmptyBookList() == true)
+            return false;
+        Movie m = bibliotecaLibrary.checkOutMovie(moviename);
+        if(m != null) {
+            this.checkedOutMovies.add(m);
+            return true;
+        }
+        else return false;
     }
 }

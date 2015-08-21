@@ -39,7 +39,7 @@ public class BibliotecaAppTest {
         boolean b = bibliotecaLibrary.initializeLibrary();
         assertEquals(true, b);
         assertFalse(bibliotecaLibrary.getIsEmptyBookList());
-        assertEquals(12,bibliotecaLibrary.getBooksList().size());
+        assertEquals(12, bibliotecaLibrary.getBooksList().size());
         assertFalse(bibliotecaLibrary.getIsEmptyMovieList());
         assertEquals(4,bibliotecaLibrary.getMovieList().size());
     }
@@ -53,7 +53,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testCheckOut() {
+    public void testCheckOutUserBook() {
         User user = new User();
         String bookname="Computer Science";
         BibliotecaLibrary bibliotecaLibrary = new BibliotecaLibrary();
@@ -98,14 +98,40 @@ public class BibliotecaAppTest {
     public void testMovie() {
         Movie movie = new Movie("Movie Name",2015,"Director Name",4.3f);
         assertEquals("Movie Name",movie.getName());
-        assertEquals(2015,movie.getYear());
-        assertEquals("Director Name",movie.getDirector());
-        assertEquals(4.3f, movie.getRating(),0.01);
+        assertEquals(2015, movie.getYear());
+        assertEquals("Director Name", movie.getDirector());
+        assertEquals(4.3f, movie.getRating(), 0.01);
 
         Movie movie2 = new Movie("Movie 2",2009,"Director 2",4);
-        assertEquals("Movie 2",movie2.getName());
-        assertEquals(2009,movie2.getYear());
-        assertEquals("Director 2",movie2.getDirector());
-        assertEquals(4f,movie2.getRating(),0.01);
+        assertEquals("Movie 2", movie2.getName());
+        assertEquals(2009, movie2.getYear());
+        assertEquals("Director 2", movie2.getDirector());
+        assertEquals(4f, movie2.getRating(), 0.01);
+    }
+
+    @Test
+    public void testCheckOutUserMovie() {
+        User user = new User();
+        String moviename="Tollywood Movie";
+        BibliotecaLibrary bibliotecaLibrary = new BibliotecaLibrary();
+        user.setIsSet();
+        user.setUserName("muskan1");
+        assertFalse(user.checkOutMovie(moviename, bibliotecaLibrary));
+
+        bibliotecaLibrary.initializeLibrary();
+        assertFalse(bibliotecaLibrary.getIsEmptyMovieList());
+        assertTrue(user.checkOutMovie(moviename, bibliotecaLibrary));
+    }
+
+    @Test
+    public void testCheckOutMovie() {
+        BibliotecaLibrary bibliotecaLibrary = new BibliotecaLibrary();
+        String moviename="Tollywood Movie";
+        Movie movie = bibliotecaLibrary.checkOutMovie(moviename);
+        assertEquals(null, movie);
+
+        bibliotecaLibrary.initializeLibrary();
+        movie=bibliotecaLibrary.checkOutMovie(moviename);
+        assertEquals(true, movie.getIsCheckedOut());
     }
 }
