@@ -39,6 +39,9 @@ public class BibliotecaAppTest {
         boolean b = bibliotecaLibrary.initializeLibrary();
         assertEquals(true, b);
         assertFalse(bibliotecaLibrary.getIsEmptyBookList());
+        assertEquals(12,bibliotecaLibrary.getBooksList().size());
+        assertFalse(bibliotecaLibrary.getIsEmptyMovieList());
+        assertEquals(4,bibliotecaLibrary.getMovieList().size());
     }
 
     @Test

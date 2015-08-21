@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.beans.beancontext.BeanContextMembershipEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,14 +10,28 @@ import java.util.Scanner;
 public class BibliotecaLibrary {
     private ArrayList<Books> bookslist;
     private boolean isEmptyBookList;
+    private ArrayList<Movie> movielist;
+    private boolean isEmptyMovieList;
+    private ArrayList<Movie> movieList;
 
     public BibliotecaLibrary() {
         isEmptyBookList=true;
         bookslist = new ArrayList<Books>();
+        isEmptyMovieList=true;
+        movielist = new ArrayList<Movie>();
     }
 
     public boolean initializeLibrary() {
-        return this.initializeBook();
+        return this.initializeBook() && this.initializeMovie();
+    }
+
+    private boolean initializeMovie() {
+        movielist.add(new Movie("Bollywood Movie", 2009, "Director one", 3.5f));
+        movielist.add(new Movie("Tollywood Movie", 2007, "Director two", 3.8f));
+        movielist.add(new Movie("Hollywood Movie", 2015, "Director five", 4.5f));
+        movielist.add(new Movie("Pollywood Movie", 2012, "Director three", 3.0f));
+        isEmptyMovieList=false;
+        return true;
     }
 
     private boolean initializeBook() {
@@ -73,5 +88,13 @@ public class BibliotecaLibrary {
 
     public boolean getIsEmptyBookList() {
         return isEmptyBookList;
+    }
+
+    public boolean getIsEmptyMovieList() {
+        return isEmptyMovieList;
+    }
+
+    public ArrayList<Movie> getMovieList() {
+        return movieList;
     }
 }
