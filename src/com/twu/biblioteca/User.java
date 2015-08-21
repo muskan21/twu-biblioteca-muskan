@@ -13,6 +13,16 @@ public class User {
     private ArrayList<Movie> checkedOutMovies;
     private String username;
     private boolean isSet;
+    private String email;
+    private long contact;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public long getContact() {
+        return contact;
+    }
 
     public User() {
         checkedOutBooks=new ArrayList<Books>();
@@ -20,11 +30,15 @@ public class User {
         isSet=false;
     }
 
-    public User(String username, String librarynumber, String password) {
+    public User(String username, String librarynumber, String password, String email, long contact) {
         this.username=username;
         this.libraryNumber=librarynumber;
         this.password=password;
         isSet=true;
+        this.email=email;
+        this.contact=contact;
+        checkedOutBooks=new ArrayList<Books>();
+        checkedOutMovies=new ArrayList<Movie>();
     }
 
     public boolean checkOutBook(String bookname, BibliotecaLibrary bibliotecaLibrary) {

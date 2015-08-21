@@ -10,10 +10,8 @@ public class BibliotecaApp {
         System.out.println(bibliotecaApp.welcome());
         Scanner input = new Scanner(System.in);
         input.nextLine();
-        //ArrayList<Books> bookslist = new ArrayList<Books>();
         BibliotecaLibrary bibliotecaLibrary = new BibliotecaLibrary();
         boolean libr = bibliotecaLibrary.initializeLibrary();
-        //System.out.println(bibliotecaLibrary.getIsEmptyBookList());
         User user=null;
         int choice;
         boolean check = false;
@@ -29,24 +27,14 @@ public class BibliotecaApp {
                         if(user == null) {
                             user=userLogin(bibliotecaLibrary);
                         }
-                        String bookname = getNameInput("checked out", "book");
-                        boolean checkout = user.checkOutBook(bookname, bibliotecaLibrary);
-                        if (checkout)
-                            System.out.println("Thank You. Enjoy the book.");
-                        else
-                            System.out.println("That book is not available.");
+                        bookCheckOut(bibliotecaLibrary, user);
                         break;
 
                     case 3:
                         if(user == null) {
                             user=userLogin(bibliotecaLibrary);
                         }
-                        String bookname2 = getNameInput("returned", "book");
-                        boolean returnbook = user.returnBook(bookname2, bibliotecaLibrary);
-                        if (returnbook)
-                            System.out.println("Thank You for returning the book.");
-                        else
-                            System.out.println("That is not a valid book to return for the signed in user.");
+                        bookReturn(bibliotecaLibrary, user);
                         break;
 
                     case 4:
@@ -57,32 +45,68 @@ public class BibliotecaApp {
                         if(user == null) {
                             user=userLogin(bibliotecaLibrary);
                         }
-                        String moviename = getNameInput("checked out", "movie");
-                        boolean checkoutm = user.checkOutMovie(moviename, bibliotecaLibrary);
-                        if (checkoutm)
-                            System.out.println("Thank You. Enjoy the movie.");
-                        else
-                            System.out.println("That movie is not available.");
+                        movieCheckOut(bibliotecaLibrary, user);
                         break;
 
                     case 6:
-                        user = userLogin(bibliotecaLibrary);
+                            user = userLogin(bibliotecaLibrary);
                         break;
 
                     case 7:
+                        if(user==null) {
+                            user=userLogin(bibliotecaLibrary);
+                        }
+                        printUser(user);
+
+                    case 8:
                         break;
 
                     default:
                         System.out.println("Select a valid option!!");
                 }
-        }while (choice != 7);
+        }while (choice != 8);
+    }
+
+    private static void bookCheckOut(BibliotecaLibrary bibliotecaLibrary, User user) {
+        String bookname = getNameInput("checked out", "book");
+        boolean checkout = user.checkOutBook(bookname, bibliotecaLibrary);
+        if (checkout)
+            System.out.println("Thank You. Enjoy the book.");
+        else
+            System.out.println("That book is not available.");
+    }
+
+    private static void bookReturn(BibliotecaLibrary bibliotecaLibrary, User user) {
+        String bookname2 = getNameInput("returned", "book");
+        boolean returnbook = user.returnBook(bookname2, bibliotecaLibrary);
+        if (returnbook)
+            System.out.println("Thank You for returning the book.");
+        else
+            System.out.println("That is not a valid book to return for the signed in user.");
+    }
+
+    private static void movieCheckOut(BibliotecaLibrary bibliotecaLibrary, User user) {
+        String moviename = getNameInput("checked out", "movie");
+        boolean checkoutm = user.checkOutMovie(moviename, bibliotecaLibrary);
+        if (checkoutm)
+            System.out.println("Thank You. Enjoy the movie.");
+        else
+            System.out.println("That movie is not available.");
+    }
+
+    private static void printUser(User user) {
+        System.out.println("User Information : ");
+        System.out.println("User name : "+user.getUserName());
+        System.out.println("User email : "+user.getEmail());
+        System.out.println("User Contact No. : "+user.getContact());
     }
 
     private static User userLogin(BibliotecaLibrary bibliotecaLibrary) {
         ArrayList<String> credentials = inputLoginCredentials();
         User user;
-        if(bibliotecaLibrary.validateUser(credentials.get(0), credentials.get(1), credentials.get(2)))
-            user = new User(credentials.get(0),credentials.get(1),credentials.get(2));
+        ArrayList cred=bibliotecaLibrary.validateUser(credentials.get(0), credentials.get(1), credentials.get(2));
+        if(cred.get(0).equals(true))
+            user = (User)cred.get(1);
         else {
             System.out.println("Invalid login credentials!");
             return null;

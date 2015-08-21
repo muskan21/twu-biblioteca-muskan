@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.beans.beancontext.BeanContextMembershipEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,10 +29,10 @@ public class BibliotecaLibrary {
     }
 
     private boolean initializeUser() {
-        userlist.add(new User("User1","123-1234","password1"));
-        userlist.add(new User("User2","123-1235","password2"));
-        userlist.add(new User("User3","123-1236","password3"));
-        userlist.add(new User("User4","123-1237","password4"));
+        userlist.add(new User("User1","123-1234","password1","user1@biblioteca.com",987654321));
+        userlist.add(new User("User2","123-1235","password2","user2@biblioteca.com",998877654));
+        userlist.add(new User("User3","123-1236","password3","user3@biblioteca.com",987987987));
+        userlist.add(new User("User4","123-1237","password4","user4@biblioteca.com",991188227));
         isEmptyUserList=false;
         return true;
     }
@@ -48,8 +47,6 @@ public class BibliotecaLibrary {
     }
 
     private boolean initializeBook() {
-        //ArrayList<Books> bookslist = new ArrayList<Books>();
-
         bookslist.add(new Books("Computer Science","Comp1",1992));
         bookslist.add(new Books("Operating Systems","Comp1",1998));
         bookslist.add(new Books("Computer Science","Comp3",1996));
@@ -76,7 +73,7 @@ public class BibliotecaLibrary {
     }
 
     public void printMenu() {
-        System.out.println("\nMENU.\n1.List Books.\n2.Check Out Book.\n3.Return Book.\n4.List Movies.\n5.Check Out Movies.\n6.User Login.\n7.Quit.\nEnter Your Choice.");
+        System.out.println("\nMENU.\n1.List Books.\n2.Check Out Book.\n3.Return Book.\n4.List Movies.\n5.Check Out Movies.\n6.User Login.\n7.User Information Display.\n8.Quit.\nEnter Your Choice.");
     }
 
     public int getInput() {
@@ -92,7 +89,6 @@ public class BibliotecaLibrary {
         for(Books b : bookslist) {
             if(b.getBookName().equals(bookname) && b.getIsCheckedOut()==false) {
                 b.setIsCheckedOut(true);
-                //System.out.println("It's true");
                 return b;
             }
         }
@@ -124,7 +120,6 @@ public class BibliotecaLibrary {
         for(Movie m : movielist) {
             if(m.getMovieName().equals(moviename) && m.getIsCheckedOut()==false) {
                 m.setIsCheckedOut();
-                //System.out.println("It's true");
                 return m;
             }
         }
@@ -138,12 +133,17 @@ public class BibliotecaLibrary {
         return userlist;
     }
 
-    public boolean validateUser(String username, String librarynumber, String password) {
+    public ArrayList validateUser(String username, String librarynumber, String password) {
+        ArrayList a = new ArrayList();
         for(User u: userlist) {
             if(username.equals(u.getUserName()) && librarynumber.equals(u.getLibraryNumber()) && password.equals(u.getPassword())) {
-                return true;
+                a.add(true);
+                a.add(u);
+                return a;
             }
         }
-        return false;
+        a.add(false);
+        a.add(null);
+        return a;
     }
 }
