@@ -25,39 +25,70 @@ public class BibliotecaApp {
                         break;
 
                     case 2:
-                        String bookname=getBookInput("checked out");
-                        boolean checkout=user.checkOutBook(bookname, bibliotecaLibrary);
-                        //System.out.println(checkout);
-                        if(checkout)
-                            System.out.println("Thank You. Enjoy the book.");
-                        else
-                            System.out.println("That book is not available.");
-                        break;
+                        try {
+                            String bookname = getNameInput("checked out", "book");
+                            boolean checkout = user.checkOutBook(bookname, bibliotecaLibrary);
+                            //System.out.println(checkout);
+                            if (checkout)
+                                System.out.println("Thank You. Enjoy the book.");
+                            else
+                                System.out.println("That book is not available.");
+                        }
+                        catch(NumberFormatException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        finally {
+                            break;
+                        }
 
                     case 3:
-                        String bookname2 = getBookInput("returned");
-                        boolean returnbook = user.returnBook(bookname2, bibliotecaLibrary);
-                        if(returnbook)
-                            System.out.println("Thank You for returning the book.");
-                        else
-                            System.out.println("That is not a valid book to return for the signed in user.");
-                        break;
+                        try {
+                            String bookname2 = getNameInput("returned", "book");
+                            boolean returnbook = user.returnBook(bookname2, bibliotecaLibrary);
+                            if (returnbook)
+                                System.out.println("Thank You for returning the book.");
+                            else
+                                System.out.println("That is not a valid book to return for the signed in user.");
+                        }
+                        catch(NumberFormatException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        finally {
+                            break;
+                        }
 
                     case 4:
                         bibliotecaLibrary.printMovieList();
                         break;
 
                     case 5:
+                        try {
+                            String moviename = getNameInput("checked out", "movie");
+                            boolean checkoutm = user.checkOutMovie(moviename, bibliotecaLibrary);
+                            //System.out.println(checkout);
+                            if (checkoutm)
+                                System.out.println("Thank You. Enjoy the movie.");
+                            else
+                                System.out.println("That movie is not available.");
+                        }
+                        catch(NumberFormatException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        finally {
+                            break;
+                        }
+
+                    case 6:
                         break;
 
                     default:
                         System.out.println("Select a valid option!!");
                 }
-        }while (choice != 5);
+        }while (choice != 6);
     }
 
-    private static String getBookInput(String op) {
-        System.out.println("Enter the name of the book to be "+op+" : ");
+    private static String getNameInput(String op, String item) throws NumberFormatException{
+        System.out.println("Enter the name of the "+item+" to be "+op+" : ");
         Scanner input= new Scanner(System.in);
         return input.nextLine();
     }

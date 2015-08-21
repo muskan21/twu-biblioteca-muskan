@@ -63,7 +63,7 @@ public class BibliotecaLibrary {
     }
 
     public void printMenu() {
-        System.out.println("\nMENU.\n1.List Books.\n2.Check Out Book.\n3.Return Book.\n4.List Movies.\n5.Quit.\nEnter Your Choice.");
+        System.out.println("\nMENU.\n1.List Books.\n2.Check Out Book.\n3.Return Book.\n4.List Movies.\n5.Check Out Movies.\n6.Quit.\nEnter Your Choice.");
     }
 
     public int getInput() {
@@ -101,6 +101,8 @@ public class BibliotecaLibrary {
     public void printMovieList() {
         System.out.println("Movie Name\t\t\t\t\tYear\tMovie Director\t\t\tRating");
         for(Movie m : movielist) {
+            if(m.getIsCheckedOut()==true)
+                continue;
             System.out.println(m.getName() + "\t\t\t\t" + m.getYear() + "\t" + m.getDirector() + "\t\t\t" + m.getRating());
         }
     }
