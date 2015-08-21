@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -88,5 +89,20 @@ public class BibliotecaAppTest {
 
         user.checkOutBook(bookname, bibliotecaLibrary);
         assertTrue(user.returnBook(bookname, bibliotecaLibrary));
+    }
+
+    @Test
+    public void testMovie() {
+        Movie movie = new Movie("Movie Name",2015,"Director Name",4.3f);
+        assertEquals("Movie Name",movie.getName());
+        assertEquals(2015,movie.getYear());
+        assertEquals("Director Name",movie.getDirector());
+        assertEquals(4.3f, movie.getRating(),0.01);
+
+        Movie movie2 = new Movie("Movie 2",2009,"Director 2",4);
+        assertEquals("Movie 2",movie2.getName());
+        assertEquals(2009,movie2.getYear());
+        assertEquals("Director 2",movie2.getDirector());
+        assertEquals(4f,movie2.getRating(),0.01);
     }
 }
